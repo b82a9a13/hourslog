@@ -1,0 +1,37 @@
+.center{
+    margin-left: auto;
+    margin-right: auto;
+}
+#otjh_progress{
+    background: red;
+    height: 25px;
+}
+#otjh_prog_progress{
+    background: green;
+    width: 25px;
+    height: 25px;
+}
+#otjh_prog_expected{
+    background: orange;
+    width: 25px;
+    height: 25px;
+}
+#otjh_prog_incomplete{
+    background: red;
+    width: 25px;
+    height: 25px;
+}
+#otjh_info_table th{
+    width: 75%;
+}
+#otjh_info_table td{
+    width: 25%;
+}
+.div-border{
+    border:2px solid #95287A;
+    border-radius:5px;
+    margin-bottom:.5rem;
+    width:100%;
+    background:#fafafa;
+    padding: .5rem;
+}
