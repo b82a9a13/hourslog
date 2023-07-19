@@ -210,6 +210,7 @@ class lib{
         $record->duration = $data[4];
         $record->creatorid = $this->get_userid();
         if($DB->insert_record('hourslog_hours_info', $record, false)){
+            \local_hourslog\event\created_hourslog::create(array('context' => \context_course::instance($cid), 'courseid' => $cid, 'relateduserid' => $uid))->trigger();
             return true;
         } else {
             return false;

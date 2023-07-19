@@ -78,5 +78,6 @@ if($errorText != ''){
         'page_url' => './teacher.php'
     ];
     echo $OUTPUT->render_from_template('local_hourslog/hours_log', $template);
+    \local_hourslog\event\viewed_hourslog::create(array('context' => \context_course::instance($cid), 'courseid' => $cid, 'relateduserid' => $uid, 'other' => $_GET['e']))->trigger();
 }
 echo $OUTPUT->footer();

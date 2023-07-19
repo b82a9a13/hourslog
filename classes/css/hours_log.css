@@ -35,3 +35,8 @@
     background:#fafafa;
     padding: .5rem;
 }
+.help-img{
+    cursor: pointer;
+    max-width: 50px;
+    max-height: 50px;
+}

@@ -52,6 +52,7 @@ if($errorTxt != ''){
         'learn_ext' => '_learn'
     ];
     echo $OUTPUT->render_from_template('local_hourslog/hours_log', $template);
+    \local_hourslog\event\viewed_hourslog_learn::create(array('context' => \context_course::instance($cid), 'courseid' => $cid))->trigger();
 }
 
 echo $OUTPUT->footer();
