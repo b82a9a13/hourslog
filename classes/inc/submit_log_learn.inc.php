@@ -25,7 +25,7 @@ if(!preg_match($textarea, $activity) || empty($activity)){
     array_push($errorarray, ['activity', 'Activity:'.preg_replace($textareaReplace, '', $activity)]);
 }
 $whatlink = $_POST['whatlink'];
-if(!preg_match("/^[a-z A-Z]*$/", $whatlink) || empty($whatlink)){
+if(!preg_match("/^[a-z A-Z0-9]*$/", $whatlink) || empty($whatlink)){
     array_push($errorarray, ['whatlink', 'What does this link to:'.preg_replace("/[a-z A-Z]/", '', $whatlink)]);
 }
 $impact = $_POST['impact'];

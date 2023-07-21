@@ -170,11 +170,25 @@ class lib{
         }
         $uid = $_SESSION['hl_records_uid'];
         $cid = $_SESSION['hl_records_cid'];
-        $file = $DB->get_record_sql('SELECT planfilename FROM {trainingplan_setup} WHERE userid = ? AND courseid = ?',[$uid, $cid])->planfilename;
-        $json = json_decode(file_get_contents($CFG->dirroot.'/local/trainingplan/templates/json/'.$file));
+        $record = $DB->get_record_sql('SELECT planfilename, option FROM {trainingplan_setup} WHERE userid = ? AND courseid = ?',[$uid, $cid]);
+        $json = json_decode(file_get_contents($CFG->dirroot.'/local/trainingplan/templates/json/'.$record->planfilename));
         $array = [];
         foreach($json->modules as $arr){
-            array_push($array, [str_replace(',','',$arr->name)]);
+            if(isset($arr->option1)){
+                if($record->option == 1){
+                    foreach($arr->option1 as $opt){
+                        array_push($array, [str_replace(',','',$opt->name)]);
+                    }
+                }
+            } elseif(isset($arr->option2)){
+                if($record->option == 2){
+                    foreach($arr->option2 as $opt){
+                        array_push($array, [str_replace(',','',$opt->name)]);
+                    }
+                }
+            } else {
+                array_push($array, [str_replace(',','',$arr->name)]);
+            }
         }
         return $array;
     }
@@ -307,6 +321,7 @@ class lib{
             $record->duration = $data[4];
             $record->creatorid = $this->get_userid();
             if($DB->update_record('hourslog_hours_info', $record)){
+                \local_hourslog\event\updated_hourslog::create(array('context' => \context_course::instance($cid), 'courseid' => $cid, 'relateduserid' => $uid))->trigger();
                 return true;
             } else {
                 return false;
@@ -429,11 +444,25 @@ class lib{
         }
         $uid = $this->get_userid();
         $cid = $_SESSION['hl_lrecords_cid'];
-        $file = $DB->get_record_sql('SELECT planfilename FROM {trainingplan_setup} WHERE userid = ? AND courseid = ?',[$uid, $cid])->planfilename;
-        $json = json_decode(file_get_contents($CFG->dirroot.'/local/trainingplan/templates/json/'.$file));
+        $record = $DB->get_record_sql('SELECT planfilename, option FROM {trainingplan_setup} WHERE userid = ? AND courseid = ?',[$uid, $cid]);
+        $json = json_decode(file_get_contents($CFG->dirroot.'/local/trainingplan/templates/json/'.$record->planfilename));
         $array = [];
         foreach($json->modules as $arr){
-            array_push($array, [str_replace(',','',$arr->name)]);
+            if(isset($arr->option1)){
+                if($record->option == 1){
+                    foreach($arr->option1 as $opt){
+                        array_push($array, [str_replace(',','',$opt->name)]);
+                    }
+                }
+            } elseif(isset($arr->option2)){
+                if($record->option == 2){
+                    foreach($arr->option2 as $opt){
+                        array_push($array, [str_replace(',','',$opt->name)]);
+                    }
+                }
+            } else {
+                array_push($array, [str_replace(',','',$arr->name)]);
+            }
         }
         return $array;
     }
@@ -531,6 +560,7 @@ class lib{
         $record->duration = $data[4];
         $record->creatorid = $this->get_userid();
         if($DB->insert_record('hourslog_hours_info', $record, false)){
+            \local_hourslog\event\created_hourslog_learn::create(array('context' => \context_course::instance($cid), 'courseid' => $cid))->trigger();
             return true;
         } else {
             return false;
@@ -587,6 +617,7 @@ class lib{
             $record->duration = $data[4];
             $record->creatorid = $this->get_userid();
             if($DB->update_record('hourslog_hours_info', $record)){
+                \local_hourslog\event\updated_hourslog_learn::create(array('context' => \context_course::instance($cid), 'courseid' => $cid))->trigger();
                 return true;
             } else {
                 return false;

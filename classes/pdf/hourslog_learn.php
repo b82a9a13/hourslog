@@ -37,3 +37,4 @@ $hlarray = $lib->get_hours_logs_learn();
 $parray = $lib->get_progress_info_learn();
 $iarray = $lib->get_info_table_data_learn();
 include('./../inc/pdf.inc.php');
+\local_hourslog\event\viewed_hourslog_pdf_learn::create(array('context' => \context_course::instance($cid), 'courseid' => $cid))->trigger();

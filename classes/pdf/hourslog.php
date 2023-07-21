@@ -52,3 +52,4 @@ $hlarray = $lib->get_hours_logs();
 $parray = $lib->get_progress_info();
 $iarray = $lib->get_info_table_data();
 include('./../inc/pdf.inc.php');
+\local_hourslog\event\viewed_hourslog_pdf::create(array('context' => \context_course::instance($cid), 'courseid' => $cid, 'relateduserid' => $uid))->trigger();

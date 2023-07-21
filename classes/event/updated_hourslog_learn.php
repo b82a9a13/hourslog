@@ -9,19 +9,19 @@ namespace local_hourslog\event;
 use core\event\base;
 defined('MOODLE_INTERNAL') || die();
 
-class viewed_hourslog_learn extends base {
+class updated_hourslog_learn extends base {
     protected function init(){
-        $this->data['crud'] = 'r';
+        $this->data['crud'] = 'u';
         $this->data['edulevel'] = self::LEVEL_PARTICIPATING;
     }
     public static function get_name(){
-        return "Hours log page viewed";
+        return "Hours log record updated";
     }
     public function get_description(){
-        return "The user with id '".$this->userid."' viewed their hours log for the course with id '".$this->courseid."'";
+        return "The user with id '".$this->userid."' updated a hours log record for their course with id '".$this->courseid."'";
     }
     public function get_url(){
-        return new \moodle_url('/local/hourslog/learner_hourslog.php?cid='.$this->courseid);
+        return new \moodle_url('/local/hourslog/teacher_hourslog.php?cid='.$this->courseid);
     }
     public function get_id(){
         return $this->objectid;
