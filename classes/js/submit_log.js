@@ -192,6 +192,7 @@ function refresh_bar(){
                 const progressbar = document.getElementById('progressbar');
                 if(progress >= expected){
                     progressbar.style = `width: ${progress}%; height: 25px; background-color: green;`;
+                    document.getElementById('expectedbar').style = `width: 0%; height: 25px; background-color: orange;`
                 } else {
                     progressbar.style = `width: ${progress}%; height: 25px; background-color: green;`;
                     document.getElementById('expectedbar').style = `width: ${expected - progress}%; height: 25px; background-color: orange;`

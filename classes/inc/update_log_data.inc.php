@@ -40,18 +40,13 @@ if(!preg_match("/^[0-9.]*$/", $duration) || empty($duration)){
 if($errorarray != []){
     $returnText->error = $errorarray;
 } else {
-    $result = $lib->update_hours_log([
+    $returnText->return = ($lib->update_hours_log([
         $date,
         $activity,
         $whatlink,
         $impact,
         $duration
-    ]);
-    if($result){
-        $returnText->return = true;
-    } else {
-        $returnText->return = false;
-    }
+    ])) ? true : false;
 }
 //Output return text
 echo(json_encode($returnText));
