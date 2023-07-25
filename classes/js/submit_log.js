@@ -185,7 +185,7 @@ function refresh_bar(){
             const text = JSON.parse(this.responseText);
             if(text['return']){
                 const progress = text['return'][0];
-                const expected = (progress >= text['return'][0]) ? 0 : text['return'][0];
+                const expected = (progress >= text['return'][1]) ? 0 : text['return'][1];
                 document.getElementById('otjh_prog_progress_p').innerText = `: ${progress}%`;
                 document.getElementById('otjh_prog_expected_p').innerText = `: ${expected}%`;
                 document.getElementById('otjh_prog_incomplete_p').innerText = `: ${100 - progress}%`;
