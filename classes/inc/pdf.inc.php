@@ -66,7 +66,7 @@ if($expect != 0){
 
 //Create red incomplete bar
 $pdf->setFillColor(255, 0, 0);
-$incomplete = 100 - $percent;
+$incomplete = 100 - ($percent + $expected);
 if($incomplete != 0){
     $pdf->Cell($infowidth * $incomplete, $height, '', 0, 0, '', 1);
 }
