@@ -9,8 +9,9 @@ require_once(__DIR__.'/../../config.php');
 use local_hourslog\lib;
 require_login();
 $lib = new lib;
+$p = 'local_hourslog';
 
-$title = 'Hours Log';
+$title = get_string('hours_log', $p);
 $type = '';
 $enrolments = [];
 $id = null;
@@ -55,18 +56,20 @@ if($errorTxt != ''){
     if($type == 'all'){
         $_SESSION['hl_menu_type'] = 'all';
         $template = (Object)[
-            'enrolments' => array_values($enrolments)
+            'enrolments' => array_values($enrolments),
+            'title' => get_string('hours_logs', $p)
         ];
         echo $OUTPUT->render_from_template('local_hourslog/teacher_all_courses', $template);
-        echo("<script src='./classes/js/teacher_course.js' defer></script>");
+        echo("<script src='./amd/min/teacher_course.min.js' defer></script>");
         \local_hourslog\event\viewed_menu::create(array('context' => \context_system::instance()))->trigger();
     } elseif($type == 'one'){
         $_SESSION['hl_menu_type'] = 'one';
         $template = (Object)[
-            'coursename' => $lib->get_course_fullname($id)
+            'coursename' => $lib->get_course_fullname($id),
+            'title' => get_string('hours_logs', $p)
         ];
         echo $OUTPUT->render_from_template('local_hourslog/teacher_one_course', $template);
-        echo("<script src='./classes/js/teacher_course.js'></script>");
+        echo("<script src='./amd/min/teacher_course.min.js'></script>");
         echo("<script defer>course_clicked($id)</script>");
         \local_hourslog\event\viewed_menu::create(array('context' => \context_course::instance($id)))->trigger();
     }

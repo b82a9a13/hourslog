@@ -1,18 +1,18 @@
 <link rel='stylesheet' href='./classes/css/hours_log.css'>
-<button onclick="window.location.href='{{page_url}}{{btm_ext}}'" class="btn btn-primary" id="activityrecord_btm">Back to menu</button>
-<h2 class='text-center'><b>{{fullname}}'s Off The Job Hours Log</b></h2>
+<button onclick="window.location.href='{{page_url}}{{btm_ext}}'" class="btn btn-primary" id="activityrecord_btm">{{btm}}</button>
+<h2 class='text-center'><b>{{fullname}} {{title}}</b></h2>
 <h2 class='text-center'><b>{{coursename}}</b></h2>
 <div class='div-border'>
-    <div class='d-flex'><div class='d-flex center'><h2 class='mt-2'><b>Create a New Record</b></h2><img class='help-img' src='./classes/img/Help.png' onclick="window.open('./classes/pdf/OTJT-Infographic.pdf', '_blank')"></div></div>
+    <div class='d-flex'><div class='d-flex center'><h2 class='mt-2'><b>{{create_anr}}</b></h2><img class='help-img' src='./classes/img/Help.png' onclick="window.open('./classes/pdf/OTJT-Infographic.pdf', '_blank')"></div></div>
     <form action="" id="hourslog_form">
         <table class='table table-bordered table-striped table-hover'>
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Activity</th>
-                    <th>What unit does this link to?</th>
-                    <th>What have you learned?</th>
-                    <th>Duration (hours spent)</th>
+                    <th>{{date}}</th>
+                    <th>{{activity}}</th>
+                    <th>{{what_link_title}}</th>
+                    <th>{{what_learn_title}}</th>
+                    <th>{{duration_title}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,7 +21,7 @@
                     <td id="td_activity" class='w-25'><textarea class='w-100' id="activity"></textarea></td>
                     <td id="td_whatlink" class='w-25'>
                         <select class='w-100' id="whatlink">
-                            <option disabled selected value="">Pick a module</option>
+                            <option disabled selected value="">{{pick_am}}</option>
                             {{#modules_array}}
                                 <option value="{{0}}">{{0}}</option>
                             {{/modules_array}}
@@ -33,12 +33,12 @@
             </tbody>
         </table>
         <h2 style="display:none;" class='text-error' id="hl_error"></h2>
-        <button class='btn btn-primary' type="submit">Submit</button>
+        <button class='btn btn-primary' type="submit">{{submit}}</button>
     </form>
 </div>
 <br>
 <div class='div-border'>
-    <h2 class='text-center mt-2'><b>Off The Job Hours Info</b></h2>
+    <h2 class='text-center mt-2'><b>{{otj_hli}}</b></h2>
     <div id="otjh_progress" class='w-75 center d-flex'>
         <div id="progressbar"></div>
         <div id="expectedbar"></div>
@@ -46,46 +46,46 @@
     <ul class='w-75 pt-2 center'>
         <li class='d-flex'>
             <div class='otjh-prog-square mr-1' id='otjh_prog_progress'></div>
-            <p>Progress</p>
+            <p>{{progress}}</p>
             <p id='otjh_prog_progress_p'>: %</p>
         </li>
         <li class='d-flex'>
             <div class='otjh-prog-square mr-1' id='otjh_prog_expected'></div>
-            <p>Expected</p>
+            <p>{{expected}}</p>
             <p id='otjh_prog_expected_p'>: %</p>
         </li>
         <li class='d-flex'>
             <div class='otjh-prog-square mr-1' id='otjh_prog_incomplete'></div>
-            <p>Incomplete</p>
+            <p>{{incomplete}}</p>
             <p id='otjh_prog_incomplete_p'>: %</p>
         </li>
     </ul>
-    <h3 class='text-left w-75 center'>Info Table</h3>
+    <h3 class='text-left w-75 center'>{{info_table}}</h3>
     <table class='table table-bordered table-striped table-hover w-75 text-center center' id="otjh_info_table">
         <tbody>
             {{#info_array}}
                 <tr>
-                    <th>Total Number of OTJ Hours Required</th>
+                    <th>{{total_notj_title}}</th>
                     <td>{{0}}</td>
                 </tr>
                 <tr>
-                    <th>Total Number of Hours Left</th>
+                    <th>{{total_nohl_title}}</th>
                     <td id="it_total_left">{{1}}</td>
                 </tr>
                 <tr>
-                    <th>Off The Job Hours Per Week</th>
+                    <th>{{otj_hpw}}</th>
                     <td>{{2}}</td>
                 </tr>
                 <tr>
-                    <th>Months on Programme</th>
+                    <th>{{months_op}}</th>
                     <td>{{3}}</td>
                 </tr>
                 <tr>
-                    <th>Weeks on Programme</th>
+                    <th>{{weeks_op}}</th>
                     <td>{{4}}</td>
                 </tr>
                 <tr>
-                    <th>Annual Leave Weeks</th>
+                    <th>{{annual_lw}}</th>
                     <td>{{5}}</td>
                 </tr>
             {{/info_array}}
@@ -94,24 +94,24 @@
 </div>
 <br>
 <div class='div-border'>
-    <h2 class='text-center'><b>Off The Job Hours Table</b></h2>
+    <h2 class='text-center'><b>{{otj_ht}}</b></h2>
     <h2 style="display:none;" class='text-error' id="ut_error"></h2>
-    <button type="button" class='btn btn-primary mr-1 mt-1' onclick="update_log_ids()">Update Record</button>
-    <button type="button" class='btn btn-primary mr-1 mt-1' onclick="reset_log_ids()">Reset</button>
-    <button type="button" class='btn btn-primary mr-1 mt-1' onclick="window.open('./classes/pdf/hourslog{{learn_ext}}.php?cid={{cid}}&uid={{uid}}')">Print Table</button>
+    <button type="button" class='btn btn-primary mr-1 mt-1' onclick="update_log_ids()">{{update_r}}</button>
+    <button type="button" class='btn btn-primary mr-1 mt-1' onclick="reset_log_ids()">{{reset}}</button>
+    <button type="button" class='btn btn-primary mr-1 mt-1' onclick="window.open('./classes/pdf/hourslog{{learn_ext}}.php?cid={{cid}}&uid={{uid}}')">{{print_t}}</button>
     <h4 style="display:none;" class='text-success mt-1' id="lt_success"></h4>
     <h4 style="display:none;" class='text-error mt-1' id="lt_error"></h4>
     <div id="update_record_div"></div>
     <table class='table table-bordered table-striped table-hover'>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Activity</th>
-                <th>What unit does this link to?</th>
-                <th>What have you learned?</th>
-                <th>Duration (hours spent)</th>
-                <th>Initials</th>
+                <th>{{id}}</th>
+                <th>{{date}}</th>
+                <th>{{activity}}</th>
+                <th>{{what_link_title}}</th>
+                <th>{{what_learn_title}}</th>
+                <th>{{duration_title}}</th>
+                <th>{{initials}}</th>
             </tr>
         </thead>
         <tbody id="logs_table_tbody">
@@ -129,4 +129,4 @@
         </tbody>
     </table>
 </div>
-<script src='./classes/js/submit_log{{learn_ext}}.js' defer></script>
+<script src='./amd/min/submit_log{{learn_ext}}.min.js' defer></script>
