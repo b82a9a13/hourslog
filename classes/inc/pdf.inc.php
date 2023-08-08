@@ -23,19 +23,19 @@ $pdf = new MyPDF('L', 'mm', 'A4');
 $pdf->AddPage('L');
 $pdf->setPrintHeader(true);
 $pdf->setFont($font, 'B', $headersize);
-$pdf->Cell(0, 0, 'Off The Job Hours Table - '.$fullname, 0, 0, 'C', 0, '', 0);
+$pdf->Cell(0, 0, get_string('otj_ht', $p).' - '.$fullname, 0, 0, 'C', 0, '', 0);
 $pdf->Ln();
 
 //Add in hours log table and data
 $pdf->setFont($font, '', $tabletext);
 $html = '<table border="1" cellpadding="2"><thead><tr>
-    <th width="20px" bgcolor="#95287A" style="color: #fafafa;"><b>ID</b></th>
-    <th width="75px" bgcolor="#95287A" style="color: #fafafa;"><b>Date</b></th>
-    <th width="183px" bgcolor="#95287A" style="color: #fafafa;"><b>Activity</b></th>
-    <th width="183px" bgcolor="#95287A" style="color: #fafafa;"><b>What unit does this link to?</b></th>
-    <th width="183px" bgcolor="#95287A" style="color: #fafafa;"><b>What have you learned?</b></th>
-    <th width="75px" bgcolor="#95287A" style="color: #fafafa;"><b>Duration (hours spent)</b></th>
-    <th width="50px" bgcolor="#95287A" style="color: #fafafa;"><b>Initials</b></th>
+    <th width="20px" bgcolor="#95287A" style="color: #fafafa;"><b>'.get_string('id', $p).'</b></th>
+    <th width="75px" bgcolor="#95287A" style="color: #fafafa;"><b>'.get_string('date', $p).'</b></th>
+    <th width="183px" bgcolor="#95287A" style="color: #fafafa;"><b>'.get_string('activity', $p).'</b></th>
+    <th width="183px" bgcolor="#95287A" style="color: #fafafa;"><b>'.get_string('what_link_title', $p).'</b></th>
+    <th width="183px" bgcolor="#95287A" style="color: #fafafa;"><b>'.get_string('what_learn_title', $p).'</b></th>
+    <th width="75px" bgcolor="#95287A" style="color: #fafafa;"><b>'.get_string('duration_title', $p).'</b></th>
+    <th width="50px" bgcolor="#95287A" style="color: #fafafa;"><b>'.get_string('initials', $p).'</b></th>
 </tr></thead><tbody>';
 foreach($hlarray as $arr){
     $html .= '<tr><td width="20px">'.$arr[0].'</td><td width="75px">'.$arr[2].'</td><td width="183px">'.$arr[3].'</td><td width="183px">'.$arr[4].'</td><td width="183px">'.$arr[5].'</td><td width="75px">'.$arr[6].'</td><td width="50px">'.$arr[8].'</td></tr>';
@@ -76,41 +76,41 @@ $pdf->Ln();
 //Create green progress value
 $pdf->setFillColor(0, 255, 0);
 $pdf->Cell($height, $height, '', 0, 0, '', 1);
-$pdf->Cell($height, $height, "Progress: $percent%", 0, 0, '', 0);
+$pdf->Cell($height, $height, get_string('progress', $p).": $percent%", 0, 0, '', 0);
 $pdf->Ln();
 
 //Create orange expected value
 $pdf->setFillColor(255, 165, 0);
 $pdf->Cell($height, $height, '', 0, 0, '', 1);
-$pdf->Cell($height, $height, "Expected: $expected%", 0, 0, '', 0);
+$pdf->Cell($height, $height, get_string('expected', $p).": $expected%", 0, 0, '', 0);
 $pdf->Ln();
 
 //Create red incomplete value
 $pdf->setFillColor(255, 0, 0);
 $pdf->Cell($height, $height, '', 0, 0, '', 1);
-$pdf->Cell($height, $height, "Incomplete: $incomplete%", 0, 0, '', 0);
+$pdf->Cell($height, $height, get_string('incomplete', $p).": $incomplete%", 0, 0, '', 0);
 $pdf->Ln();
 
 //Create info table
 $pdf->setFillColor(220, 220, 220);
 $pdf->setFont($font, 'B', 18);
-$pdf->Cell(270, $height, 'Info Table', 0, 0, 'C', 0);
+$pdf->Cell(270, $height, get_string('info_table', $p), 0, 0, 'C', 0);
 $pdf->Ln();
 $pdf->setFont($font, '', $tabletext);
 $infowidth = 270 * 0.25;
-$pdf->Cell($infowidth, $height, 'Total Number of Hours Targeted', 1, 0, 'C', 1);
+$pdf->Cell($infowidth, $height, get_string('total_notj_title', $p), 1, 0, 'C', 1);
 $pdf->Cell($infowidth, $height, $iarray[0], 1, 0, '', 0);
-$pdf->Cell($infowidth, $height, 'Total Number of Hours Left', 1, 0, 'C', 1);
+$pdf->Cell($infowidth, $height, get_string('total_nohl_title', $p), 1, 0, 'C', 1);
 $pdf->Cell($infowidth, $height, $iarray[1], 1, 0, '', 0);
 $pdf->Ln();
-$pdf->Cell($infowidth, $height, 'Off The Job Hours Per Week', 1, 0, 'C', 1);
+$pdf->Cell($infowidth, $height, get_string('otj_hpw', $p), 1, 0, 'C', 1);
 $pdf->Cell($infowidth, $height, $iarray[2], 1, 0, '', 0);
-$pdf->Cell($infowidth, $height, 'Months on Programme', 1, 0, 'C', 1);
+$pdf->Cell($infowidth, $height, get_string('months_op', $p), 1, 0, 'C', 1);
 $pdf->Cell($infowidth, $height, $iarray[3], 1, 0, '', 0);
 $pdf->Ln();
-$pdf->Cell($infowidth, $height, 'Weeks on Programme', 1, 0, 'C', 1);
+$pdf->Cell($infowidth, $height, get_string('weeks_op', $p), 1, 0, 'C', 1);
 $pdf->Cell($infowidth, $height, $iarray[4], 1, 0, '', 0);
-$pdf->Cell($infowidth, $height, 'Annual Leave Weeks', 1, 0, 'C', 1);
+$pdf->Cell($infowidth, $height, get_string('annual_lw', $p), 1, 0, 'C', 1);
 $pdf->Cell($infowidth, $height, $iarray[5], 1, 0, '', 0);
 
 //Output the pdf

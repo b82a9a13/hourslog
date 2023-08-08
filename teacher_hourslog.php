@@ -11,22 +11,22 @@ require_login();
 $lib = new lib;
 $p = 'local_hourslog';
 
-$errorTxt = '';
+$errorText = '';
 $e = $_GET['e'];
 $uid = $_GET['uid'];
 $cid = $_GET['cid'];
 $fullname = '';
 if($_GET['e']){
     if(($e != 'a' && $e != 'c') || empty($e)){
-        $errorTxt = 'Invalid e character provided.';
+        $errorText = get_string('invalid_ecp', $p);
     } else {
         if($_GET['uid']){
             if(!preg_match("/^[0-9]*$/", $uid) || empty($uid)){
-                $errorText = 'Invalid user id provided.';
+                $errorText = get_string('invalid_uip', $p);
             } else {
                 if($_GET['cid']){
                     if(!preg_match("/^[0-9]*$/", $cid) || empty($cid)){
-                        $errorText = 'Invalid course id provided.';
+                        $errorText = get_string('invalid_cip', $p);
                     } else {
                         if($lib->check_coach_course($cid)){
                             $context = context_course::instance($cid);
@@ -39,23 +39,25 @@ if($_GET['e']){
                             $PAGE->set_pagelayout('incourse');
                             $fullname = $lib->check_learner_enrolment($cid, $uid);
                             if($fullname == false){
-                                $errorText = 'The user selected is not enrolled as a learner in the course selected.';
+                                $errorText = get_string('selected_neal', $p);
                             } else {
                                 $_SESSION['hl_records_uid'] = $uid;
                                 $_SESSION['hl_records_cid'] = $cid;
                             }
                         } else  {
-                            $errorText = 'You are not enrolled as a coach in the course provided.';
+                            $errorText = get_string('not_eacicp', $p);
                         }
                     }
                 } else {
-                    $errorText = 'No course id provided.';
+                    $errorText = get_string('no_cip', $p);
                 }
             }
         } else {
-            $errorText = 'No user id provided.';
+            $errorText = get_string('no_uip', $p);
         }
     }
+} else {
+    $errorText = get_string('no_evp', $p);
 }
 
 echo $OUTPUT->header();

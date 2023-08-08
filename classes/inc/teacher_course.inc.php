@@ -4,11 +4,12 @@ use local_hourslog\lib;
 require_login();
 $lib = new lib;
 $returnText = new stdClass();
+$p = 'local_hourslog';
 
 if(isset($_POST['id'])){
     $id = $_POST['id'];
     if(!preg_match("/^[0-9]*$/", $id) || empty($id)){
-        $returnText->error = 'Course id provided is not a number.';
+        $returnText->error = get_string('course_ipnan', $p);
     } else {
         //Retrieve relevant data
         $array = $lib->get_enrolled_learners($id);
@@ -18,8 +19,8 @@ if(isset($_POST['id'])){
                     <table style="width:100%;">
                         <thead>
                             <tr>
-                                <th class="tp-title"><h2><b>Full Name</b></h2></th>
-                                <th><h2><b>Tracking</b></h2></th>
+                                <th class="tp-title"><h2><b>'.get_string('full_name', $p).'</b></h2></th>
+                                <th><h2><b>'.get_string('tracking', $p).'</b></h2></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -75,14 +76,14 @@ if(isset($_POST['id'])){
                 $html .= '</tbody></table>';
                 $returnText->return = str_replace("  ","",$html);
             } else {
-                $returnText->error = 'No learners available';
+                $returnText->error = get_string('no_la', $p);
             }
         } else {
-            $returnText->error = 'Invalid course id provided';
+            $returnText->error = get_string('invalid_cip', $p);
         }
     }
 } else {
-    $returnText->error = 'No course id provided.';
+    $returnText->error = get_string('no_cip', $p);
 }
 //Output return text
 echo(json_encode($returnText));

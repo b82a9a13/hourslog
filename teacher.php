@@ -19,7 +19,7 @@ $errorTxt = '';
 if($_GET['id']){
     $id = $_GET['id'];
     if(!preg_match("/^[0-9]*$/", $id) || empty($id)){
-        $errorTxt = 'Invalid course id.';
+        $errorTxt = get_string('invalid_cip', $p);
     } else {
         if($lib->check_coach_course($id)){
             $context = context_course::instance($id);
@@ -28,7 +28,7 @@ if($_GET['id']){
             $PAGE->set_course($lib->get_course_record($id));
             $type = 'one';
         } else {
-            $errorText = "You are not enrolled as a coach in the course provided.";
+            $errorTxt = get_string('not_eacicp', $p);
         }
     }
 } else {
@@ -39,7 +39,7 @@ if($_GET['id']){
         $PAGE->set_context($context);
         $type = 'all';
     } else {
-        $errorTxt = 'No courses available.';
+        $errorTxt = get_string('no_ca', $p);
     }
 }
 
