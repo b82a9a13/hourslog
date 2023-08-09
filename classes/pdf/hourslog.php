@@ -10,15 +10,17 @@ require_login();
 $lib = new lib;
 $p = 'local_hourslog';
 
-$cid = $_GET['cid'];
-$uid = $_GET['uid'];
+$cid = null;
+$uid = null;
 $fullname = '';
-if($_GET['uid']){
+if(isset($_GET['uid'])){
+    $uid = $_GET['uid'];
     if(!preg_match("/^[0-9]*$/", $uid) || empty($uid)){
         echo(get_string('invalid_uip', $p));
         exit();
     } else {
-        if($_GET['cid']){
+        if(isset($_GET['cid'])){
+            $cid = $_GET['cid'];
             if(!preg_match("/^[0-9]*$/", $cid) || empty($cid)){
                 echo(get_string('invalid_cip', $p));
                 exit();

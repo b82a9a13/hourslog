@@ -84,7 +84,7 @@ class lib{
     public function get_progress_uid_cid($uid, $cid){
         global $DB;
         $record = $DB->get_record_sql('SELECT otjhours, totalmonths, startdate FROM {trainingplan_setup} WHERE userid = ? and courseid = ?',[$uid, $cid]);
-        $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
+        $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.id, {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
             INNER JOIN {hourslog_hours_info} ON {hourslog_hours_info}.hoursid = {hourslog_hours}.id
             WHERE {hourslog_hours}.userid = ? AND {hourslog_hours}.courseid = ?',
         [$uid, $cid]);
@@ -344,7 +344,7 @@ class lib{
             return $array;
         } else {
             $record = $DB->get_record_sql('SELECT otjhours, hoursperweek, totalmonths, annuallw FROM {trainingplan_setup} WHERE userid = ? and courseid = ?',[$uid, $cid]);
-            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
+            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.id, {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
                 INNER JOIN {hourslog_hours_info} ON {hourslog_hours_info}.hoursid = {hourslog_hours}.id
                 WHERE {hourslog_hours}.userid = ? AND {hourslog_hours}.courseid = ?',
             [$uid, $cid]);
@@ -377,7 +377,7 @@ class lib{
             return 'Error';
         } else {
             $record = $DB->get_record_sql('SELECT otjhours FROM {trainingplan_setup} WHERE userid = ? and courseid = ?',[$uid, $cid]);
-            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
+            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.id, {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
                 INNER JOIN {hourslog_hours_info} ON {hourslog_hours_info}.hoursid = {hourslog_hours}.id
                 WHERE {hourslog_hours}.userid = ? AND {hourslog_hours}.courseid = ?',
             [$uid, $cid]);
@@ -402,7 +402,7 @@ class lib{
             return false;
         } else {
             $record = $DB->get_record_sql('SELECT otjhours, totalmonths, startdate FROM {trainingplan_setup} WHERE userid = ? and courseid = ?',[$uid, $cid]);
-            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
+            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.id, {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
                 INNER JOIN {hourslog_hours_info} ON {hourslog_hours_info}.hoursid = {hourslog_hours}.id
                 WHERE {hourslog_hours}.userid = ? AND {hourslog_hours}.courseid = ?',
             [$uid, $cid]);
@@ -480,7 +480,7 @@ class lib{
             return $array;
         } else {
             $record = $DB->get_record_sql('SELECT otjhours, hoursperweek, totalmonths, annuallw FROM {trainingplan_setup} WHERE userid = ? and courseid = ?',[$uid, $cid]);
-            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
+            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.id, {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
                 INNER JOIN {hourslog_hours_info} ON {hourslog_hours_info}.hoursid = {hourslog_hours}.id
                 WHERE {hourslog_hours}.userid = ? AND {hourslog_hours}.courseid = ?',
             [$uid, $cid]);
@@ -639,7 +639,7 @@ class lib{
             return false;
         } else {
             $record = $DB->get_record_sql('SELECT otjhours, totalmonths, startdate FROM {trainingplan_setup} WHERE userid = ? and courseid = ?',[$uid, $cid]);
-            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
+            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.id, {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
                 INNER JOIN {hourslog_hours_info} ON {hourslog_hours_info}.hoursid = {hourslog_hours}.id
                 WHERE {hourslog_hours}.userid = ? AND {hourslog_hours}.courseid = ?',
             [$uid, $cid]);
@@ -674,7 +674,7 @@ class lib{
             return 'Error';
         } else {
             $record = $DB->get_record_sql('SELECT otjhours FROM {trainingplan_setup} WHERE userid = ? and courseid = ?',[$uid, $cid]);
-            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
+            $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.id, {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
                 INNER JOIN {hourslog_hours_info} ON {hourslog_hours_info}.hoursid = {hourslog_hours}.id
                 WHERE {hourslog_hours}.userid = ? AND {hourslog_hours}.courseid = ?',
             [$uid, $cid]);

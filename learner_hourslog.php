@@ -11,10 +11,11 @@ require_login();
 $lib = new lib;
 $p = 'local_hourslog';
 
+$e = null;
 $errorTxt = '';
-$cid = $_GET['cid'];
 $fullname = '';
-if($_GET['cid']){
+if(isset($_GET['cid'])){
+    $cid = $_GET['cid'];
     if(!preg_match("/^[0-9]*$/", $cid) || empty($cid)){
         $errorTxt = get_string('invalid_cip', $p);
     } else {
@@ -23,8 +24,9 @@ if($_GET['cid']){
         $PAGE->set_context($context);
         $PAGE->set_course($lib->get_course_record($cid));
         $PAGE->set_url(new moodle_url("/local/activityrecord/learner_records.php?cid=$cid"));
-        $PAGE->set_title('Activity Records');
-        $PAGE->set_heading('Activity Records');
+        $title = get_string('otj_hl', $p);
+        $PAGE->set_title($title);
+        $PAGE->set_heading($title);
         $PAGE->set_pagelayout('incourse');
         $fullname = $lib->get_current_user_fullname();
         if(!$lib->check_setup_exists_learner($cid)){

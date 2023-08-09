@@ -11,10 +11,11 @@ require_login();
 $lib = new lib;
 $p = 'local_hourslog';
 
+$cid = null;
 $errorTxt = '';
-$cid = $_GET['cid'];
 $fullname = '';
-if($_GET['cid']){
+if(isset($_GET['cid'])){
+    $cid = $_GET['cid'];
     if(!preg_match("/^[0-9]*$/", $cid) || empty($cid)){
         $errorTxt = get_string('invalid_cip', $p);
     } else {

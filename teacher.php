@@ -11,12 +11,11 @@ require_login();
 $lib = new lib;
 $p = 'local_hourslog';
 
-$title = get_string('hours_log', $p);
 $type = '';
 $enrolments = [];
 $id = null;
 $errorTxt = '';
-if($_GET['id']){
+if(isset($_GET['id'])){
     $id = $_GET['id'];
     if(!preg_match("/^[0-9]*$/", $id) || empty($id)){
         $errorTxt = get_string('invalid_cip', $p);
@@ -43,6 +42,7 @@ if($_GET['id']){
     }
 }
 
+$title = get_string('hours_log', $p);
 $PAGE->set_url(new moodle_url('/local/hourslog/teacher.php'));
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
