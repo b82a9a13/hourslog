@@ -21,8 +21,8 @@ if(isset($_GET['e'])){
     if(($e != 'a' && $e != 'c') || empty($e)){
         $errorText = get_string('invalid_ecp', $p);
     } else {
-        $uid = $_GET['uid'];
         if(isset($_GET['uid'])){
+            $uid = $_GET['uid'];
             if(!preg_match("/^[0-9]*$/", $uid) || empty($uid)){
                 $errorText = get_string('invalid_uip', $p);
             } else {
