@@ -37,8 +37,10 @@ $html = '<table border="1" cellpadding="2"><thead><tr>
     <th width="75px" bgcolor="#95287A" style="color: #fafafa;"><b>'.get_string('duration_title', $p).'</b></th>
     <th width="50px" bgcolor="#95287A" style="color: #fafafa;"><b>'.get_string('initials', $p).'</b></th>
 </tr></thead><tbody>';
-foreach($hlarray as $arr){
-    $html .= '<tr><td width="20px">'.$arr[0].'</td><td width="75px">'.$arr[2].'</td><td width="183px">'.$arr[3].'</td><td width="183px">'.$arr[4].'</td><td width="183px">'.$arr[5].'</td><td width="75px">'.$arr[6].'</td><td width="50px">'.$arr[8].'</td></tr>';
+if($hlarray != []){
+    foreach($hlarray as $arr){
+        $html .= '<tr><td width="20px">'.$arr[0].'</td><td width="75px">'.$arr[2].'</td><td width="183px">'.$arr[3].'</td><td width="183px">'.$arr[4].'</td><td width="183px">'.$arr[5].'</td><td width="75px">'.$arr[6].'</td><td width="50px">'.$arr[8].'</td></tr>';
+    }
 }
 $html .= "</tbody></table>";
 $pdf->writeHTML($html, true, false, false, false, false, '');
