@@ -10,13 +10,13 @@ use stdClass;
 class lib{
         
     //Get the category id for apprenticeships
-    public function get_category_id(){
+    private function get_category_id(){
         global $DB;
         return $DB->get_record_sql('SELECT id FROM {course_categories} WHERE name = ?',['Apprenticeships'])->id;
     }
 
     //Get current userid
-    public function get_userid(){
+    private function get_userid(){
         global $USER;
         return $USER->id;
     }
@@ -27,16 +27,10 @@ class lib{
         return $DB->get_record_sql('SELECT fullname FROM {course} WHERE id = ?',[$id])->fullname;
     }
 
+    //Get the full name for the current user
     public function get_current_user_fullname(){
         global $DB;
         $record = $DB->get_record_sql('SELECT firstname, lastname FROM {user} WHERE id = ?',[$this->get_userid()]);
-        return $record->firstname.' '.$record->lastname;
-    }
-
-    //Get user full name from a specific id
-    public function get_user_fullname($id){
-        global $DB;
-        $record = $DB->get_record_sql('SELECT firstname, lastname FROM {user} WHERE id = ?',[$id]);
         return $record->firstname.' '.$record->lastname;
     }
 
@@ -81,7 +75,7 @@ class lib{
     }
 
     //Get the progress for a specific userid and courseid
-    public function get_progress_uid_cid($uid, $cid){
+    private function get_progress_uid_cid($uid, $cid){
         global $DB;
         $record = $DB->get_record_sql('SELECT otjhours, totalmonths, startdate FROM {trainingplan_setup} WHERE userid = ? and courseid = ?',[$uid, $cid]);
         $records = $DB->get_records_sql('SELECT {hourslog_hours_info}.id, {hourslog_hours_info}.duration as duration FROM {hourslog_hours} 
@@ -231,7 +225,7 @@ class lib{
         }
     }
 
-    public function get_initials_uid($uid){
+    private function get_initials_uid($uid){
         global $DB;
         $record = $DB->get_record_sql('SELECT firstname, lastname FROM {user} WHERE id = ?',[$uid]);
         return substr($record->firstname, 0, 1).''.substr($record->lastname, 0, 1);

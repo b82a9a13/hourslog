@@ -1,4 +1,8 @@
 <?php
+if(!isset($hlarray) && !isset($parray) && !isset($iarray)){
+    echo("<h1 class='text-center'>Error</h1>");
+    exit();
+}
 require_once($CFG->libdir.'/filelib.php');
 require_once($CFG->libdir.'/tcpdf/tcpdf.php');
 class MYPDF extends TCPDF{
